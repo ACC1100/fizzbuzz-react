@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/fizzbuzz-react/static/css/main.9b63582a.chunk.css",
+    "main.js": "/fizzbuzz-react/static/js/main.e1dbee62.chunk.js",
+    "main.js.map": "/fizzbuzz-react/static/js/main.e1dbee62.chunk.js.map",
+    "runtime-main.js": "/fizzbuzz-react/static/js/runtime-main.6e25cec3.js",
+    "runtime-main.js.map": "/fizzbuzz-react/static/js/runtime-main.6e25cec3.js.map",
+    "static/js/2.b814b4b3.chunk.js": "/fizzbuzz-react/static/js/2.b814b4b3.chunk.js",
+    "static/js/2.b814b4b3.chunk.js.map": "/fizzbuzz-react/static/js/2.b814b4b3.chunk.js.map",
+    "index.html": "/fizzbuzz-react/index.html",
+    "static/css/main.9b63582a.chunk.css.map": "/fizzbuzz-react/static/css/main.9b63582a.chunk.css.map",
+    "static/js/2.b814b4b3.chunk.js.LICENSE.txt": "/fizzbuzz-react/static/js/2.b814b4b3.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6e25cec3.js",
+    "static/js/2.b814b4b3.chunk.js",
+    "static/css/main.9b63582a.chunk.css",
+    "static/js/main.e1dbee62.chunk.js"
+  ]
+}
