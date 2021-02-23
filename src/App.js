@@ -14,9 +14,9 @@ class App extends React.Component {
         this.state = {
             history: [],
             status: "start",
+            buttons_visibility: "hidden",
             time: 0,
-            current_time: 0,
-            buttons_visibility: "hidden"
+            currentTime: 0
         };
     }
 
@@ -51,13 +51,22 @@ class App extends React.Component {
             return [
                 <Center h="100%" padding="2"><Heading as="h1" size="md" color="primary.900">SELECT DIFFICULTY</Heading></Center>,
                 <ButtonGroup variant="solid" spacing="6">
-                    <Button isFullWidth onClick={() => this.play(2000)}>easy (2000ms)</Button>
-                    <Button isFullWidth onClick={() => this.play(1000)}>medium (1000ms)</Button>
-                    <Button isFullWidth onClick={() => this.play(500)}>hard (500ms)</Button>
+                    <Button isFullWidth onClick={() => this.play(5000)}>easy</Button>
+                    <Button isFullWidth onClick={() => this.play(2500)}>medium</Button>
+                    <Button isFullWidth onClick={() => this.play(1000)}>hard</Button>
                 </ButtonGroup>
             ]
         }   else if (this.state.status == "play") {
-            return <Heading as="h1" size="md" color="primary.900">PLAYING: {this.state.time}ms</Heading>
+
+            if (this.state.currentTime > 0) {
+                return [
+                    <Center h="100%" padding="2"><Heading as="h1" size="md" color="primary.900">PLAYING</Heading></Center>,
+                    <Center h="100%" padding="2"><Heading>{this.state.currentTime}ms</Heading></Center>
+                ]
+            } else {
+                this.end();
+            }
+            
         }   else if (this.state.status == "done") {
             return [
                 <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>, 
@@ -91,7 +100,8 @@ class App extends React.Component {
             if (pItem != '') {
                 this.state.history.push(pItem);
                 this.setState({
-                    history: this.state.history
+                    history: this.state.history,
+                    currentTime: this.state.time,
                 });
             } else {
                 pItem = 'WRONG'
@@ -106,13 +116,34 @@ class App extends React.Component {
 
     }
 
-    play = (time_) => {
+    play = (max_time) => {
         this.setState({
             status: "play",
-            time: time_,
-            current_time: time_,
-            buttons_visibility: "visible"
+            buttons_visibility: "visible",
+            // timer: <Timer time={max_time}/>
+            time: max_time,
+            currentTime: max_time
         });
+        this.timerID = setInterval(
+            () => this.tick(),
+            10
+        );
+    }
+
+    tick() {    
+        this.setState({      
+            currentTime: this.state.currentTime - 10 + (Math.floor(Math.random() * Math.floor(4)) - 2)
+            // that math floor thing is random int between -2 and 2
+            // so that it changes the smallest digit and looks more legit lmao, it averages out anyway
+        });  
+    }
+
+    end = () => {
+        this.setState({
+            status: "done",
+            buttons_visibility: "hidden"
+        });
+        clearInterval(this.timerID);
     }
 
     restart = () => {
