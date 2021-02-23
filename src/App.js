@@ -1,6 +1,6 @@
 import React from 'react';
 import {ChakraProvider, Box, Text, VStack, Grid, theme,} from '@chakra-ui/react';
-import {ListItem, UnorderedList } from "@chakra-ui/react"
+import {ListItem, UnorderedList, OrderedList} from "@chakra-ui/react"
 import {ButtonGroup, Button, Heading } from "@chakra-ui/react"
 import { Center} from "@chakra-ui/react"
 
@@ -37,7 +37,6 @@ class App extends React.Component {
         let fizzBuzzButton = this._get_individual_button(4, "FizzBuzz");
 
         buttons.push(numButton, fizzButton, buzzButton, fizzBuzzButton);
-        // buttons.push(<ColorModeSwitcher justifySelf="flex-end"/>)
 
         return <ButtonGroup variant="solid" spacing="6" visibility={this.state.buttons_visibility}>{buttons}</ButtonGroup>;
     }
@@ -70,9 +69,23 @@ class App extends React.Component {
         }   else if (this.state.status == "done") {
             return [
                 <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>, 
-                <Button isFullWidth onClick={() => this.restart()}>RESTART</Button>
+                <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
+    }
+
+    get_instructions = () => {
+        return  [
+            <Center h="100%" paddingTop="5">
+                <Heading as="h1" size="md" color="primary.900">INSTRUCTIONS</Heading>
+            </Center>,
+            <OrderedList>
+                <ListItem>Click the number button to count incrementally</ListItem>
+                <ListItem>Click 'Fizz' if the number is divisible by 3</ListItem>
+                <ListItem>Click 'Buzz' if the number is divisible by 5</ListItem>
+                <ListItem>Click 'FizzBuzz' if the number is divisible by both 3 and 5!</ListItem>
+            </OrderedList>
+        ]
     }
 
     button_click = (buttonNumber) => {
@@ -169,9 +182,10 @@ class App extends React.Component {
 
                 <Box w="80%" h="50vh" rounded="2xl" padding="50"><div class="overflowList">{this.get_ul()}</div></Box> 
                 
-                <div className="center">
-                    {this.get_status()}
-                </div>
+                {this.get_status()}
+
+                {this.get_instructions()}
+                
 
             </VStack>
         </ChakraProvider>
