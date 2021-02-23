@@ -53,6 +53,7 @@ class App extends React.Component {
                     <Button isFullWidth onClick={() => this.play(5000)}>easy</Button>
                     <Button isFullWidth onClick={() => this.play(2500)}>medium</Button>
                     <Button isFullWidth onClick={() => this.play(1000)}>hard</Button>
+                    <Button isFullWidth onClick={() => this.play(500)}>extreme</Button>
                 </ButtonGroup>
             ]
         }   else if (this.state.status == "play") {
@@ -69,6 +70,7 @@ class App extends React.Component {
         }   else if (this.state.status == "done") {
             return [
                 <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>,
+                <Heading as="h2" size="md" color="primary.900" paddingBottom="20px">SCORE: {this.state.history.length}</Heading>,
                 <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
