@@ -30,7 +30,7 @@ class App extends React.Component {
 
     get_button = () => {
         var buttons = [];
-        
+
         let numButton = this._get_individual_button(1, this.state.history.length + 1);
         let fizzButton = this._get_individual_button(2, "Fizz");
         let buzzButton = this._get_individual_button(3, "Buzz");
@@ -65,10 +65,10 @@ class App extends React.Component {
             } else {
                 this.end();
             }
-            
+
         }   else if (this.state.status == "done") {
             return [
-                <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>, 
+                <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>,
                 <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
@@ -91,7 +91,6 @@ class App extends React.Component {
     button_click = (buttonNumber) => {
         var pItem = '';
         var count = this.state.history.length + 1
-
 
         if (count % 15 == 0) {
             if (buttonNumber == 4) {
@@ -117,18 +116,7 @@ class App extends React.Component {
                     currentTime: this.state.time,
                 });
             } else {
-                // pItem = 'WRONG'
-                // this.state.history.push(pItem);
-                // this.setState({
-                //     history: this.state.history,
-                //     status: "done",
-                //     buttonIsDisable: "hidden"
-                // });
-                this.setState({
-                    status: "done",
-                    buttonIsDisable: "true"
-                });
-                clearInterval(this.timerID);
+                this.end();
             }
         }
 
@@ -148,12 +136,12 @@ class App extends React.Component {
         );
     }
 
-    tick() {    
-        this.setState({      
+    tick() {
+        this.setState({
             currentTime: this.state.currentTime - 10 + (Math.floor(Math.random() * Math.floor(4)) - 2)
             // that math floor thing is random int between -2 and 2
             // so that it changes the smallest digit and looks more legit lmao, it averages out anyway
-        });  
+        });
     }
 
     end = () => {
@@ -172,25 +160,22 @@ class App extends React.Component {
     }
 
     render () {
-        
         return (
         <ChakraProvider theme={theme}>
-            
             <VStack spacing={4} p={2} borderRadius="lg">
 
                 <Grid templateColumns="repeat(2, 1fr)" minW="100vw" gap={10}>
                 <Center h="100%"><Heading as="h1" size="md" color="primary.900" paddingBottom="20px">FizzBuzz game</Heading></Center>
                 <Center h="100%"><ColorModeSwitcher justifySelf="flex-end"/></Center>
                 </Grid>
-            
+
                 {this.get_button()}
 
-                <Box w="80%" h="50vh" rounded="2xl" padding="50"><div class="overflowList">{this.get_ul()}</div></Box> 
-                
+                <Box w="80%" h="50vh" rounded="2xl" padding="50"><div class="overflowList">{this.get_ul()}</div></Box>
+
                 {this.get_status()}
 
                 {this.get_instructions()}
-                
 
             </VStack>
         </ChakraProvider>
