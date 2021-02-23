@@ -14,7 +14,7 @@ class App extends React.Component {
         this.state = {
             history: [],
             status: "start",
-            buttons_visibility: "hidden",
+            buttonIsDisable: true,
             time: 0,
             currentTime: 0
         };
@@ -38,7 +38,7 @@ class App extends React.Component {
 
         buttons.push(numButton, fizzButton, buzzButton, fizzBuzzButton);
 
-        return <ButtonGroup variant="solid" spacing="6" visibility={this.state.buttons_visibility}>{buttons}</ButtonGroup>;
+        return <ButtonGroup variant="solid" spacing="6" isDisabled={this.state.buttonIsDisable}>{buttons}</ButtonGroup>;
     }
 
     _get_individual_button = (buttonNumber, content) => {
@@ -117,13 +117,18 @@ class App extends React.Component {
                     currentTime: this.state.time,
                 });
             } else {
-                pItem = 'WRONG'
-                this.state.history.push(pItem);
+                // pItem = 'WRONG'
+                // this.state.history.push(pItem);
+                // this.setState({
+                //     history: this.state.history,
+                //     status: "done",
+                //     buttonIsDisable: "hidden"
+                // });
                 this.setState({
-                    history: this.state.history,
                     status: "done",
-                    buttons_visibility: "hidden"
+                    buttonIsDisable: "true"
                 });
+                clearInterval(this.timerID);
             }
         }
 
@@ -132,7 +137,7 @@ class App extends React.Component {
     play = (max_time) => {
         this.setState({
             status: "play",
-            buttons_visibility: "visible",
+            buttonIsDisable: false,
             // timer: <Timer time={max_time}/>
             time: max_time,
             currentTime: max_time
@@ -154,7 +159,7 @@ class App extends React.Component {
     end = () => {
         this.setState({
             status: "done",
-            buttons_visibility: "hidden"
+            buttonIsDisable: true,
         });
         clearInterval(this.timerID);
     }
