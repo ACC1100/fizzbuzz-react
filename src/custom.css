@@ -3,7 +3,7 @@
     column-fill: auto;
     -webkit-column-fill: auto;
     -moz-column-fill: auto;
-    column-width: 150px;
-    -webkit-column-width: 150px;
-    -moz-column-width: 150px;
+    column-width: max(6em, 9vw);
+    -webkit-column-width: max(6em, 9vw);
+    -moz-column-width: max(6em, 9vw);
 }

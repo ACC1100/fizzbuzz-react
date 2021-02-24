@@ -20,7 +20,8 @@ class App extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            history: [],
+            // history: [],
+            history: new Array(50).fill('1'),
             status: "start",
             buttonIsDisable: true,
             time: 0,
@@ -57,7 +58,7 @@ class App extends React.Component {
         if (this.state.status == "start") {
             return [
                 <Center h="100%" padding="2"><Heading as="h1" size="md" color="primary.900">SELECT DIFFICULTY</Heading></Center>,
-                <ButtonGroup variant="solid" spacing="6">
+                <ButtonGroup variant="solid" spacing="1vw">
                     <Button isFullWidth onClick={() => this.play(5000)}>easy</Button>
                     <Button isFullWidth onClick={() => this.play(2500)}>medium</Button>
                     <Button isFullWidth onClick={() => this.play(1000)}>hard</Button>
@@ -78,8 +79,8 @@ class App extends React.Component {
 
         }   else if (this.state.status == "done") {
             return [
-                <Heading as="h1" size="md" color="primary.900" paddingBottom="20px">YOU JUST GOT BUZZED</Heading>,
-                <Heading as="h2" size="md" color="primary.900" paddingBottom="20px">SCORE: {this.state.history.length}</Heading>,
+                <Heading as="h1" size="md" color="primary.900" paddingBottom="1vh">YOU JUST GOT BUZZED</Heading>,
+                <Heading as="h2" size="md" color="primary.900" paddingBottom="1vh">SCORE: {this.state.history.length}</Heading>,
                 <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
@@ -187,13 +188,13 @@ class App extends React.Component {
             <VStack spacing={4} p={2} borderRadius="lg">
 
                 <Grid templateColumns="repeat(2, 1fr)" minW="100vw" gap={10}>
-                <Center h="100%"><Heading as="h1" size="md" color="primary.900" paddingBottom="20px">FizzBuzz game</Heading></Center>
-                <Center h="100%"><ColorModeSwitcher justifySelf="flex-end"/></Center>
+                    <Center h="100%"><Heading as="h1" size="md" color="primary.900" paddingBottom="1vh">FizzBuzz game</Heading></Center>
+                    <Center h="100%"><ColorModeSwitcher justifySelf="flex-end"/></Center>
                 </Grid>
 
                 {this.get_button()}
 
-                <Box w="80%" h="50vh" rounded="2xl" padding="50"><div class="overflowList">{this.get_ul()}</div></Box>
+                <Box w="90%" h="50vh" rounded="2xl" padding="5px"><div class="overflowList">{this.get_ul()}</div></Box>
 
                 {this.get_status()}
 
