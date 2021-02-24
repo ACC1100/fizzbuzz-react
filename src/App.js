@@ -6,6 +6,14 @@ import {Center} from "@chakra-ui/react"
 
 import {ColorModeSwitcher} from './ColorModeSwitcher';
 
+import {
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionPanel,
+    AccordionIcon,
+  } from "@chakra-ui/react"
+
 import "./custom.css"
 
 class App extends React.Component {
@@ -79,15 +87,24 @@ class App extends React.Component {
 
     get_instructions = () => {
         return  [
-            <Center h="100%" paddingTop="5">
-                <Heading as="h1" size="md" color="primary.900">INSTRUCTIONS</Heading>
-            </Center>,
-            <OrderedList>
-                <ListItem>Click the number button to count incrementally</ListItem>
-                <ListItem>Click 'Fizz' if the number is divisible by 3</ListItem>
-                <ListItem>Click 'Buzz' if the number is divisible by 5</ListItem>
-                <ListItem>Click 'FizzBuzz' if the number is divisible by both 3 and 5!</ListItem>
-            </OrderedList>
+            <Accordion allowToggle>
+                <AccordionItem>
+                    <h2>
+                        <AccordionButton>
+                            <Box>INSTRUCTIONS</Box>
+                            <AccordionIcon />
+                        </AccordionButton>
+                    </h2>
+                    <AccordionPanel>
+                        <OrderedList>
+                            <ListItem>Click the number button to count incrementally</ListItem>
+                            <ListItem>Click 'Fizz' if the number is divisible by 3</ListItem>
+                            <ListItem>Click 'Buzz' if the number is divisible by 5</ListItem>
+                            <ListItem>Click 'FizzBuzz' if the number is divisible by both 3 and 5!</ListItem>
+                        </OrderedList>
+                    </AccordionPanel>
+                </AccordionItem>
+            </Accordion>
         ]
     }
 
