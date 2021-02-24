@@ -2,9 +2,9 @@ import React from 'react';
 import {ChakraProvider, Box, Text, VStack, Grid, theme,} from '@chakra-ui/react';
 import {ListItem, UnorderedList, OrderedList} from "@chakra-ui/react"
 import {ButtonGroup, Button, Heading } from "@chakra-ui/react"
-import { Center} from "@chakra-ui/react"
+import {Center} from "@chakra-ui/react"
 
-import { ColorModeSwitcher } from './ColorModeSwitcher';
+import {ColorModeSwitcher} from './ColorModeSwitcher';
 
 import "./custom.css"
 
