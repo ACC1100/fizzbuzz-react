@@ -56,11 +56,12 @@ class App extends React.Component {
                     <Button isFullWidth onClick={() => this.play(500)}>extreme</Button>
                 </ButtonGroup>
             ]
-        }   else if (this.state.status == "play") {
+        }   else if (this.state.status == "play" || this.state.status == "pause") {
+            let text = (this.state.status == "play" ? "PLAYING" : "PAUSED, press buttons to start");
 
             if (this.state.currentTime > 0) {
                 return [
-                    <Center h="100%" padding="2"><Heading as="h1" size="md" color="primary.900">PLAYING</Heading></Center>,
+                    <Center h="100%" padding="2"><Heading as="h1" size="md" color="primary.900">{text}</Heading></Center>,
                     <Center h="100%" padding="2"><Heading>{this.state.currentTime}ms</Heading></Center>
                 ]
             } else {
@@ -110,10 +111,11 @@ class App extends React.Component {
             pItem = count;
         }
 
-        if (this.state.status == "play") {
+        if (this.state.status == "play" || this.state.status == "pause") {
             if (pItem != '') {
                 this.state.history.push(pItem);
                 this.setState({
+                    status: "play",
                     history: this.state.history,
                     currentTime: this.state.time,
                 });
@@ -126,9 +128,8 @@ class App extends React.Component {
 
     play = (max_time) => {
         this.setState({
-            status: "play",
+            status: "pause", // start paused
             buttonIsDisable: false,
-            // timer: <Timer time={max_time}/>
             time: max_time,
             currentTime: max_time
         });
@@ -139,11 +140,13 @@ class App extends React.Component {
     }
 
     tick() {
-        this.setState({
-            currentTime: this.state.currentTime - 10 + (Math.floor(Math.random() * Math.floor(4)) - 2)
-            // that math floor thing is random int between -2 and 2
-            // so that it changes the smallest digit and looks more legit lmao, it averages out anyway
-        });
+        if (this.state.status == 'play') {
+            this.setState({
+                currentTime: this.state.currentTime - 10 + (Math.floor(Math.random() * Math.floor(4)) - 2)
+                // that math floor thing is random int between -2 and 2
+                // so that it changes the smallest digit and looks more legit lmao, it averages out anyway
+            });
+        }
     }
 
     end = () => {
