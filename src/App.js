@@ -20,8 +20,8 @@ class App extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            // history: [],
-            history: new Array(50).fill('1'),
+            history: [],
+            // history: new Array(50).fill('1'), // test for automatically filling history
             status: "start",
             buttonIsDisable: true,
             time: 0,
