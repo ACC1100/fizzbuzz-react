@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Box, Center} from '@chakra-ui/react';
 
-import { Animate, AnimateKeyframes }  from 'react-simple-animate';
+import { Animate }  from 'react-simple-animate';
 
 export function TrailingHistory(props) {
     var boxList = []
