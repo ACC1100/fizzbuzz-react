@@ -132,6 +132,8 @@ class App extends React.Component {
             pItem = this.state.count;
         }
 
+        pItem = Math.random()
+
         if (this.state.status == "play" || this.state.status == "pause") {
             if (pItem != '') {
                 this.state.history.push(pItem);
