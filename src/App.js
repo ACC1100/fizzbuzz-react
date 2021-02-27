@@ -202,7 +202,7 @@ class App extends React.Component {
 
                 {this.get_button()}
 
-                <TrailingHistory history={this.state.history.slice(-2).reverse()}/>
+                <TrailingHistory history={this.state.history.slice(-3).reverse()}/>
 
                 {this.get_status()}
 

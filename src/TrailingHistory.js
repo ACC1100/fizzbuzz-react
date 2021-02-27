@@ -1,23 +1,24 @@
 import React from 'react';
 import { HStack, Box, Center} from '@chakra-ui/react';
 
-import { Animate }  from 'react-simple-animate';
+import { Animate, AnimateKeyframes }  from 'react-simple-animate';
 
 export function TrailingHistory(props) {
     var boxList = []
 
     // EMPTY BOX PUSHES ARE USED FOR POSITION PURPOSES
+    
+    // LEFT BOX
     if (props.history.length >= 2) {
-        // LEFT BOX
         boxList.push(
             <Animate 
                 play={true}
-                start={{transform: "translateX(20vw) scale(2, 1.5)"}}
+                start={{transform: "translateX(40vw) scale(2, 1.5)"}}
                 end={{transform: "translateX(0px) scale(1, 1)"}}
-                duration={0.1}
+                duration={1}
             >
                 <Box w="20vw" maxWidth="200px" h="20vh" bg="tomato" rounded="xl">
-                    <Center h="100%">{props.history[0]}</Center>
+                    <Center h="100%">{props.history[1]}</Center>
                 </Box>
             </Animate>
         )
@@ -27,6 +28,23 @@ export function TrailingHistory(props) {
         )
     }
 
+    // USED FOR LEFT BOX EXIT ANIMATION
+    if (props.history.length == 3) {
+        boxList.push(
+            <Animate 
+                play={true}
+                start={{transform: "translate(-24vw, -10vh)"}}
+                end={{transform: "translate(-44vw, -5vh) scale(0.5, 0.66)"}}
+                duration={1}
+            >
+                <Box w="20vw" maxWidth="200px" h="20vh" bg="tomato" rounded="xl" position="absolute">
+                    <Center h="100%">{props.history[2]}</Center>
+                </Box>
+            </Animate>
+        )
+    }
+    
+
     if (props.history.length >= 1) {
         // MAIN BOX
         boxList.push(
@@ -34,7 +52,7 @@ export function TrailingHistory(props) {
                 play={true}
                 start={{transform: "translateX(40vw) scale(0.5, 0.66)"}}
                 end={{transform: "translateX(0px) scale(1, 1)"}}
-                duration={0.1}
+                duration={1}
             >
                 <Center>
                     <Box w="40vw" maxWidth="400px" h="30vh" bg="tomato" rounded="xl">
@@ -52,16 +70,16 @@ export function TrailingHistory(props) {
     }
 
     if (props.history.length >= 0) {
-        // LEFT BOX
+        // RIGHT BOX
         boxList.push(
             <Animate 
                 play={true}
                 start={{transform: "translateX(20vw) scale(0.5, 0.66)"}}
                 end={{transform: "translateX(0px) scale(1, 1)"}}
-                duration={0.1}
+                duration={1}
             >
                 <Box w="20vw" maxWidth="200px" h="20vh" bg="tomato" rounded="xl">
-                    <Center h="100%">{props.history[0]}</Center>
+                    {/* blank box */}
                 </Box>
             </Animate>
         )
@@ -74,9 +92,9 @@ export function TrailingHistory(props) {
 
     return (
         // YOOOO, HAVE UNIQUE KEY TO FORCE RE RENDER
-        <HStack spacing={8} key={props.history[0]}>
+        // <HStack spacing={8} key={props.history[0]}>
+        <HStack spacing="4vw" key={props.history[0]}>
             {boxList}
-            {/* <Box visibility="hidden" w="20vw" h="20vh" maxWidth="200px"/> */}
         </HStack>
     )
 }
