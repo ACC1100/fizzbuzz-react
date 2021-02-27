@@ -23,8 +23,8 @@ class App extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            // history: [],
-            history: new Array(27).fill('0'), // test for automatically filling history
+            history: [],
+            // history: new Array(27).fill('0'), // test for automatically filling history
             count: 1,
             status: "start",
             buttonIsDisable: true,
@@ -139,6 +139,7 @@ class App extends React.Component {
                     status: "play",
                     history: this.state.history,
                     currentTime: this.state.time,
+                    count: this.state.count + 1
                 });
             } else {
                 this.end();
