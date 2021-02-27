@@ -5,6 +5,8 @@ import {ButtonGroup, Button, Heading } from "@chakra-ui/react"
 import {Center} from "@chakra-ui/react"
 
 import {ColorModeSwitcher} from './ColorModeSwitcher';
+import {TrailingHistory} from './TrailingHistory';
+
 
 import {
     Accordion,
@@ -16,16 +18,18 @@ import {
 
 import "./custom.css"
 
+
 class App extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            history: [],
-            // history: new Array(50).fill('1'), // test for automatically filling history
+            // history: [],
+            history: new Array(27).fill('0'), // test for automatically filling history
+            count: 1,
             status: "start",
             buttonIsDisable: true,
             time: 0,
-            currentTime: 0
+            currentTime: 0,
         };
     }
 
@@ -40,7 +44,7 @@ class App extends React.Component {
     get_button = () => {
         var buttons = [];
 
-        let numButton = this._get_individual_button(1, this.state.history.length + 1);
+        let numButton = this._get_individual_button(1, this.state.count);
         let fizzButton = this._get_individual_button(2, "Fizz");
         let buzzButton = this._get_individual_button(3, "Buzz");
         let fizzBuzzButton = this._get_individual_button(4, "FizzBuzz");
@@ -80,7 +84,7 @@ class App extends React.Component {
         }   else if (this.state.status == "done") {
             return [
                 <Heading as="h1" size="md" color="primary.900" paddingBottom="1vh">YOU JUST GOT BUZZED</Heading>,
-                <Heading as="h2" size="md" color="primary.900" paddingBottom="1vh">SCORE: {this.state.history.length}</Heading>,
+                <Heading as="h2" size="md" color="primary.900" paddingBottom="1vh">SCORE: {this.state.count}</Heading>,
                 <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
@@ -111,22 +115,21 @@ class App extends React.Component {
 
     button_click = (buttonNumber) => {
         var pItem = '';
-        var count = this.state.history.length + 1
 
-        if (count % 15 == 0) {
+        if (this.state.count % 15 == 0) {
             if (buttonNumber == 4) {
                 pItem = 'FizzBuzz';
             }
-        } else if (count % 5 == 0) {
+        } else if (this.state.count % 5 == 0) {
             if (buttonNumber == 3) {
                 pItem = 'Buzz';
             }
-        } else if (count % 3 == 0) {
+        } else if (this.state.count % 3 == 0) {
             if (buttonNumber == 2) {
                 pItem = 'Fizz';
             }
         } else if (buttonNumber == 1) {
-            pItem = count;
+            pItem = this.state.count;
         }
 
         if (this.state.status == "play" || this.state.status == "pause") {
@@ -178,6 +181,7 @@ class App extends React.Component {
     restart = () => {
         this.setState({
             history: [],
+            count: 1,
             status: "start"
         });
     }
@@ -194,7 +198,7 @@ class App extends React.Component {
 
                 {this.get_button()}
 
-                <Box w="90%" h="50vh" rounded="2xl" padding="5px"><div class="overflowList">{this.get_ul()}</div></Box>
+                <TrailingHistory history={this.state.history.slice(-2).reverse()}/>
 
                 {this.get_status()}
 
