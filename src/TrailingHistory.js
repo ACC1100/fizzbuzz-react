@@ -1,91 +1,52 @@
 import React from 'react';
 import { HStack, Box, Center} from '@chakra-ui/react';
-import { Slide, useDisclosure } from "@chakra-ui/react"
+// import { Slide, useDisclosure } from "@chakra-ui/react"
+// import Button from "@chakra-ui/react"
 
-import Button from "@chakra-ui/react"
+import { Animate }  from 'react-simple-animate';
 
-// function SlideEx() {
-//     const { isOpen, onToggle } = useDisclosure()
-  
-//     return (
-//       <>
-//         <Button onClick={onToggle}>Click Me</Button>
-//         <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-//           <Box
-//             p="40px"
-//             color="white"
-//             mt="4"
-//             bg="teal.500"
-//             rounded="md"
-//             shadow="md"
-//           >
-//             aksdjhajksehlaksjheklajhselkjh
-//           </Box>
-//         </Slide>
-//       </>
-//     )
-//   }
-
-// export class TrailingHistory extends React.Component {
-//     constructor (props) {
-//         super(props);
-
-//         // this.history = this.props.history;
-//         // const { isOpen, onToggle } = useDisclosure();
-
-//     }
-
-//     // SlideEx() {
-        
-//     // }
-
-
-//     render() {
-//         // console.log(this.props.history)
-
-
-//         return (
-//             <HStack  spacing={8}>
-//                 <Box w="20vw" h="20vh" bg="tomato" rounded="xl">
-//                     {this.props.history[0]}
-//                 </Box>
-
-//                 <Slide direction="bottom" in={isOpen} style={{ zIndex: 10 }}>
-//                 <Center>
-//                     <Box w="40vw" h="30vh" bg="tomato" rounded="xl">
-//                         {this.props.history[1]}
-//                     </Box>
-//                 </Center>
-//                 </Slide>
-
-//                 <Box visibility="hidden" w="20vw" h="20vh" bg="tomato" rounded="xl">
-//                     THIS IS JUST HERE FOR POSITIONING PURPOSES
-//                 </Box>
-//             </HStack>
-//         )
-//     }
-// }
 
 export function TrailingHistory(props) {
-    const { isOpen, onToggle } = useDisclosure();
+    // const { isOpen, onToggle } = useDisclosure();
+    var boxList = []
 
-    return (
-        <HStack  spacing={8}>
+    if (props.history.length >= 2) {
+        boxList.push(
             <Box w="20vw" h="20vh" bg="tomato" rounded="xl">
                 {props.history[1]}
             </Box>
+        )
+    }   else {
+        boxList.push(
+            <Box visibility="hidden" w="20vw" h="20vh" />
+        )
+    }
 
-            {/* <Slide direction="right" in={false}> */}
+    if (props.history.length >= 1) {
+        boxList.push(
             <Center>
                 <Box w="40vw" h="30vh" bg="tomato" rounded="xl">
                     {props.history[0]}
                 </Box>
             </Center>
-            {/* </Slide> */}
+        )
+    }   else {
+        boxList.push(
+            <Center>
+                <Box visibility="hidden" w="40vw" h="30vh"/>
+            </Center>
+        )
+    }
 
-            <Box visibility="hidden" w="20vw" h="20vh" bg="tomato" rounded="xl">
-                THIS IS JUST HERE FOR POSITIONING PURPOSES
-            </Box>
+    return (
+        <HStack  spacing={8}>
+            {boxList}
+
+            {/* <Animate>
+            
+            </Animate> */}
+
+            <Box visibility="hidden" w="20vw" h="20vh"/>
         </HStack>
     )
 }

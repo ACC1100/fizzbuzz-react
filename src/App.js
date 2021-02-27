@@ -188,6 +188,7 @@ class App extends React.Component {
     }
 
     render () {
+        // console.log(this.state.history.slice(-2).reverse())
         return (
         <ChakraProvider theme={theme}>
             <VStack spacing={4} p={2} borderRadius="lg">
