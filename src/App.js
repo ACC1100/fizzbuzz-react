@@ -84,7 +84,7 @@ class App extends React.Component {
         }   else if (this.state.status == "done") {
             return [
                 <Heading as="h1" size="md" color="primary.900" paddingBottom="1vh">YOU JUST GOT BUZZED</Heading>,
-                <Heading as="h2" size="md" color="primary.900" paddingBottom="1vh">SCORE: {this.state.count}</Heading>,
+                <Heading as="h2" size="md" color="primary.900" paddingBottom="1vh">SCORE: {this.state.history.length}</Heading>,
                 <Button onClick={() => this.restart()}>RESTART</Button>
             ]
         }
@@ -132,7 +132,7 @@ class App extends React.Component {
             pItem = this.state.count;
         }
 
-        pItem = Math.random()
+        // pItem = Math.random()
 
         if (this.state.status == "play" || this.state.status == "pause") {
             if (pItem != '') {
